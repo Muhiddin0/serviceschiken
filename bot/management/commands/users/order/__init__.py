@@ -1,0 +1,1 @@
+from . import set_order, set_name, set_phone, set_day, set_price, set_location
