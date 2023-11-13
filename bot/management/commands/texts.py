@@ -1,8 +1,5 @@
 
 start = \
 """
-<b>
-Salom {}
-Botga Xush kelibsiz
-</b>
+<b>Assalomu alaykum Inter broiler botimizga xush kelibsiz.</b>
 """

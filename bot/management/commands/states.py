@@ -1,8 +1,16 @@
 from aiogram.dispatcher.filters.state import StatesGroup, State
 
-class UserSatate(StatesGroup):
-    fullname = State()
+class SupplierRegisterState(StatesGroup):
+    name = State()
     phone = State()
-    region = State()
-    organization = State()
-    position = State()
+
+
+class DeliveryState(StatesGroup):
+    name = State()
+    phone = State()
+    location = State()
+    count = State()
+    image = State()
+    comment = State()
+
+    
