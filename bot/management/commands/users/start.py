@@ -8,7 +8,7 @@ from .. import texts, buttons
 import asyncio
 
 async def start_task(message: types.Message, state: FSMContext=None):
-    await message.answer(texts.start.format(message.from_user.first_name))
+    await message.answer(texts.start.format(message.from_user.first_name), reply_markup=buttons.start)
     
     
 @dp.message_handler(state="*", commands=['start'])
