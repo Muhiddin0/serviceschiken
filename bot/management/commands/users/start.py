@@ -14,3 +14,5 @@ async def start_task(message: types.Message, state: FSMContext=None):
 @dp.message_handler(state="*", commands=['start'])
 async def send_welcome(message: types.Message, state: FSMContext=None):
     asyncio.create_task(start_task(message, state))
+
+# py manage.py startapp deliver
