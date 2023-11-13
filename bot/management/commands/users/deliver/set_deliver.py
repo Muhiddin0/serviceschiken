@@ -14,3 +14,5 @@ async def set_deliver_task(message: types.Message, state: FSMContext=None):
 @dp.message_handler(text='🚚 Yetkazib berish', content_types='text')
 async def func(message: types.Message, state: FSMContext=None):
     asyncio.create_task(set_deliver_task(message, state))
+
+    
