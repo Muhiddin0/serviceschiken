@@ -10,6 +10,7 @@ import asyncio
 
 async def set_name_task(message: types.Message, state: FSMContext=None):
     name = message.text
+
     await state.set_data(
         {
             "name":name

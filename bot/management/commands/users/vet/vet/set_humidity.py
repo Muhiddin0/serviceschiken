@@ -11,13 +11,15 @@ import asyncio
 async def set_name_task(message: types.Message, state: FSMContext=None):
     humidity = message.text
 
+    # set data in state
     state_data = await state.get_data()
     state_data['humidity'] = humidity
-
     await state.set_data(state_data)
 
+    # send message from user
     await message.answer(texts.vet_temperature)
     
+    # change state
     await VetClientState.temperature.set()
 
     

@@ -23,5 +23,3 @@ class VetClient(models.Model):
 
     def __str__(self) -> str:
         return self.name
-
-# Jo`jaxonani rasm va videoga olib yuboring

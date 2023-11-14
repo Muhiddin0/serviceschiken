@@ -15,7 +15,7 @@ async def set_name_task(message: types.Message, state: FSMContext=None):
             "name":name
         }
     )
-    await message.answer(text=texts.vet_client_phone)
+    await message.answer(text=texts.vet_client_phone, reply_markup=buttons.cancel)
     
     await VetClientState.phone.set()
     

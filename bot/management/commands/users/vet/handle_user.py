@@ -27,7 +27,8 @@ async def set_order_task(message: types.Message, state: FSMContext=None):
             await message.answer(texts.register_vet, reply_markup=buttons.register)
             return
 
-    await message.answer(texts.vet_client_name)
+    await message.answer(texts.great, reply_markup=buttons.remove_keyboard)
+    await message.answer(texts.vet_client_name, reply_markup=buttons.cancel)
 
     await VetClientState.name.set()    
 

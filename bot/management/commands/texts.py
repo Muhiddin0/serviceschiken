@@ -4,6 +4,12 @@ start = \
 <b>Assalomu alaykum Inter broiler botimizga xush kelibsiz.</b>
 """
 
+menu = """
+Asosiy menu
+"""
+great = """
+👌 Juda yaxshi
+"""
 set_name = """
 <b>Ismingizni kiriting:</b>
 """

@@ -16,7 +16,8 @@ async def set_name_task(message: types.Message, state: FSMContext=None):
 
     await state.set_data(state_data)
 
-    await message.answer(texts.vet_sickness)
+    await message.answer(texts.vet_sickness, reply_markup=buttons.cancel)
+    
     await VetClientState.sickness.set()
 
     

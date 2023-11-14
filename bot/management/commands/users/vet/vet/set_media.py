@@ -44,6 +44,8 @@ def set_client(data):
     m.img = ImageFile(open(f"{data['user_id']}.jpg", "rb"))
     m.save()
 
+    print(m)
+
     os.remove(f'{data["user_id"]}.jpg')
 
 async def set_name_task(message: types.Message, state: FSMContext=None):
@@ -56,7 +58,7 @@ async def set_name_task(message: types.Message, state: FSMContext=None):
 
     img = "https://api.telegram.org/file/bot{}/{}".format(os.getenv('BOT_TOKEN'), file_info['file_path'])
    
-    state_data = await state.get_data()
+    state_data = await state.get_data() 
     state_data['user_id'] = user_id
     state_data['img'] = img
 
