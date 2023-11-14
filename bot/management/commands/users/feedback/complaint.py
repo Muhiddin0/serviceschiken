@@ -53,12 +53,12 @@ def is_channel(func):
             for left_channel in left_channels:
                 keywords.add(InlineKeyboardButton(text=left_channel['name'], url=left_channel['url']))
 
-            keywords.add(InlineKeyboardButton(text="Tekshirish ☑️", callback_data="confirm"))
+            keywords.add(InlineKeyboardButton(text="Tekshirish ✅", callback_data="confirm"))
             try:
-                await msg.answer("Homiylarga obuna boling",reply_markup=keywords)
+                await msg.answer("kanalga obuna boling",reply_markup=keywords)
             except Exception as e:
                 print(e)
-                await msg.answer("Homiylarga obuna boling")
+                await msg.answer("kanalga obuna boling")
         else:
             return await func(msg)
     return decerator
@@ -72,7 +72,7 @@ async def set_order_task(message: types.Message, state: FSMContext=None):
     await Feedback.text.set()
     
     
-@dp.message_handler(text='🖍shikoyat bildirish', content_types='text')
+@dp.message_handler(text='📜shikoyat bildirish', content_types='text')
 @is_channel
 async def func(message: types.Message, state: FSMContext=None):
     asyncio.create_task(set_order_task(message, state))
