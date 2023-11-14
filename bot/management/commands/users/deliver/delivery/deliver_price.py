@@ -16,9 +16,9 @@ async def set_name_task(message: types.Message, state: FSMContext=None):
 
     await state.set_data(state_data)
 
-    await message.answer(texts.del_img)
+    await message.answer(texts.deliver_media)
     
-    await DeliveryState.location.set()
+    await DeliveryState.media.set()
     
     
 @dp.message_handler(content_types='text', state=DeliveryState.price)

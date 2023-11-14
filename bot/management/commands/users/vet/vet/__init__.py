@@ -1,0 +1,1 @@
+from . import set_name, set_phone, set_location, set_day, set_humidity, set_temperatue, set_sickness, set_diagnose, set_media

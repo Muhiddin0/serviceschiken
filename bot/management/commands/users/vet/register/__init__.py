@@ -1,0 +1,1 @@
+from . import set_register, set_name, set_phone

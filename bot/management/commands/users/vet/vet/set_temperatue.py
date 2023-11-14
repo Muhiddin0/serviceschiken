@@ -4,23 +4,22 @@ from aiogram.dispatcher import FSMContext
 from bot.models import User
 from ....loader import dp, bot
 from .... import texts, buttons
-from ....states import DeliveryState
+from ....states import VetClientState
 
 import asyncio
 
 async def set_name_task(message: types.Message, state: FSMContext=None):
-    image = message.photo
+    temperature = message.text
 
     state_data = await state.get_data()
-    state_data['image'] = image
+    state_data['temperature'] = temperature
 
     await state.set_data(state_data)
 
-    await message.answer(texts.del_comment)
+    await message.answer(texts.vet_sickness)
+    await VetClientState.sickness.set()
+
     
-    await DeliveryState.location.set()
-    
-    
-@dp.message_handler(content_types='text', state=DeliveryState.image)
+@dp.message_handler(content_types='text', state=VetClientState.temperature)
 async def func(message: types.Message, state: FSMContext=None):
     asyncio.create_task(set_name_task(message, state))

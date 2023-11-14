@@ -11,6 +11,10 @@ phone = ReplyKeyboardMarkup([
     [KeyboardButton('📞 Send', request_contact=True)]
 ], resize_keyboard=True)
 
+
 location = ReplyKeyboardMarkup([
-   [KeyboardButton("📍location", request_location=True)] 
+   [KeyboardButton("📍location", request_location=True)]], resize_keyboard=True)
+
+register = ReplyKeyboardMarkup([
+    [KeyboardButton("👨‍💻 Ro'yxatdan o'tish")]
 ], resize_keyboard=True)

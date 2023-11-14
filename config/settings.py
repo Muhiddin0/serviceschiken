@@ -39,9 +39,9 @@ INSTALLED_APPS = [
     
     
     'bot',
-    'tbot',
     'index',
-    
+    'vet',
+    'delivered',
     
     'crispy_forms',
     'crispy_bootstrap5',

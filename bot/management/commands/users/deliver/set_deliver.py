@@ -9,7 +9,7 @@ from ...states import DeliveryState
 import asyncio
 
 async def set_deliver_task(message: types.Message, state: FSMContext=None):
-     await message.answer(text=texts.del_name)
+     await message.answer(text=texts.deliver_name)
      await DeliveryState.name.set()
     
     

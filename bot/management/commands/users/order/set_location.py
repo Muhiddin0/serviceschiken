@@ -1,3 +1,4 @@
+import os
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 
@@ -7,6 +8,10 @@ from ... import texts, buttons
 from ...states import OrderState
 
 import asyncio
+
+import dotenv
+
+dotenv.load_dotenv()
 
 async def set_phone_task(message: types.Message, state: FSMContext=None):
     location = message.text
@@ -18,10 +23,12 @@ async def set_phone_task(message: types.Message, state: FSMContext=None):
 
     await message.answer(text=texts.finish)    
     
-    print(
-        await state.get_data()
+    data = await state.get_data()
+
+    await bot.send_message(
+        chat_id=os.getenv('GROUP_CHAT_ID'),
+        text=texts.send_order.format(data['name'],data['phone'], data['day'], data['price'], data['location'])
     )
-    
     await state.finish()
     
     

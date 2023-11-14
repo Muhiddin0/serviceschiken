@@ -4,26 +4,23 @@ from aiogram.dispatcher import FSMContext
 from bot.models import User
 from ....loader import dp, bot
 from .... import texts, buttons
-from ....states import SupplierRegisterState
+from ....states import DeliveryState
 
 import asyncio
 
 async def set_phone_task(message: types.Message, state: FSMContext=None):
-    phone = message.contact.phone_number
+    phone = message.text
     
     state_data = await state.get_data()
     state_data['phone'] = phone
 
     await state.set_data(state_data)
 
-    await message.answer(text=texts.finished)    
-
-    await state.finished()
+    await message.answer(text=texts.deliver_location, reply_markup=buttons.location)
+    
+    await DeliveryState.location.set()
     
     
-@dp.message_handler(content_types=types.ContentType.CONTACT, state=SupplierRegisterState.phone)
+@dp.message_handler(content_types='text', state=DeliveryState.phone)
 async def func(message: types.Message, state: FSMContext=None):
     asyncio.create_task(set_phone_task(message, state))
-
-
-
