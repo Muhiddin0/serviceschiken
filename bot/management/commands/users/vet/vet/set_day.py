@@ -11,15 +11,16 @@ import asyncio
 async def set_name_task(message: types.Message, state: FSMContext=None):
     day = message.text
 
+    # set data in state
     state_data = await state.get_data()
     state_data['day'] = day
-
     await state.set_data(state_data)
 
-    await message.answer(texts.vet_humidity)
+    # send message from user
+    await message.answer(texts.vet_humidity, reply_markup=buttons.cancel)
     
+    # change state
     await VetClientState.humidity.set()
-    # set_humidity.py
     
 @dp.message_handler(content_types='text', state=VetClientState.day)
 async def func(message: types.Message, state: FSMContext=None):

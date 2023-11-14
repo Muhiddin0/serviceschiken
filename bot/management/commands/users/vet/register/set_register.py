@@ -9,7 +9,9 @@ from ....states import VetRegister
 import asyncio
 
 async def set_order_task(message: types.Message, state: FSMContext=None):
-    await message.answer(text=texts.set_name)
+    await message.answer(texts.great, reply_markup=buttons.remove_keyboard)
+
+    await message.answer(text=texts.set_name, reply_markup=buttons.cancel)
     await VetRegister.name.set()
     
     
