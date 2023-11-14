@@ -38,4 +38,5 @@ class DeliveryState(StatesGroup):
     comment = State()
     
 
-    
+class Feedback(StatesGroup):
+    text = State()   

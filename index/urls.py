@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index, xabr_yuborish
+from .views import index
 
 app_name = 'index'
 urlpatterns = [

@@ -56,13 +56,8 @@ async def set_name_task(message: types.Message, state: FSMContext=None):
     state_data['user_id'] = user_id
     state_data['img'] = img
 
-    await set_client(state_data)
-    media_group = [
-        InputMediaPhoto(media='', caption='Caption 1'),
-        InputMediaPhoto(media='', caption='Caption 2'),
-        # Add more media items as needed
-    ]
 
+    await set_client(state_data)
     await bot.send_media_group(
         chat_id=os.getenv("GROUP_CHAT_ID"),
         media=media_group,
@@ -73,6 +68,12 @@ async def set_name_task(message: types.Message, state: FSMContext=None):
             state_data['price'],
         )
     )
+    media_group = [
+        InputMediaPhoto(media='', caption='caption'),
+        InputMediaPhoto(media='', caption='Caption 2'),
+        # Add more media items as needed
+    ]
+
         
 
     await bot.send_media_group()(
