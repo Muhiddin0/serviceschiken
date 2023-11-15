@@ -6,11 +6,13 @@ class VetUsers(models.Model):
     user_id = models.PositiveIntegerField()
     name = models.CharField(max_length=250)
     phone = models.CharField(max_length=250)
+    status = models.BooleanField(default=True)
 
     def __str__(self) -> str:
         return self.name
 
 class VetClient(models.Model):
+    vet = models.ForeignKey(VetUsers, on_delete=models.CASCADE)
     name = models.CharField(max_length=250)
     phone = models.CharField(max_length=250)
     location = models.CharField(max_length=250)

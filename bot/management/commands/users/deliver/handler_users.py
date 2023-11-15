@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404
 from delivered.models import DeliverUsers
 from ...loader import dp, bot
 from ... import texts, buttons
-from ...states import DeliveryState
+from ...states import DeliveryState, SupplierRegisterMenuState
 import asyncio
 
 from asgiref.sync import sync_to_async
@@ -21,12 +21,14 @@ async def set_order_task(message: types.Message, state: FSMContext=None):
 
     print(user)
 
-    if user is not None:
+    if not len(user):
+        await message.answer(texts.register_deliver, reply_markup=buttons.register)
+        await SupplierRegisterMenuState.menu.set()
+        return
 
-        if not len(user):
-            await message.answer(texts.register_deliver, reply_markup=buttons.register)
-            return
-
+    if not user.first().status:
+        await message.answer(texts.block_user)
+        return
     await message.answer(texts.deliver_name)
 
     await DeliveryState.name.set()

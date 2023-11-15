@@ -4,16 +4,13 @@ start = \
 <b>Assalomu alaykum Inter broiler botimizga xush kelibsiz.</b>
 """
 
-<<<<<<< HEAD
-
-=======
 menu = """
 Asosiy menu
 """
 great = """
 👌 Juda yaxshi
 """
->>>>>>> f00fd4ad94dce3bcc3ee1a48dfcc9126cb6ff949
+
 set_name = """
 <b>Ismingizni kiriting:</b>
 """
@@ -78,13 +75,19 @@ Yetkazib beruvchi Sifatida ro'yxatdan o'ting
 
 
 finish_del_register = """
-🎉 Yetkazib beruvchi sifatida ro'yxatdan
-O'tganingiz bilan tabriklayman
+Ro'yxatdan o'ttingiz 
+Admin tasdiqalshini kuting
 """
 
+succes_register = """
+🎉 Yetkazib beruvchi sifatida ro'yxatdan
+O'tganingiz bilan tabriklayman"""
 
 
 
+block_user = """
+Sizning hissobingiz adminlar tomonidan vaqtinchalik to'xtatilgan
+"""
 
 
 
@@ -153,3 +156,9 @@ kasalligi: {}
 Tashxis: {}
 """
 
+check_deliver_user = """
+role: yetkazib beruvchi
+Ismi: <a href="tg://user?username=@dailyuzbbot">{}</a>
+name: <a href="tg://user?username=@dailyuzbbot">{}</a>
+account: <a href="tg://user?id={}">user</a>
+"""

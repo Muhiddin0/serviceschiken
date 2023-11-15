@@ -1,5 +1,8 @@
 from aiogram.dispatcher.filters.state import StatesGroup, State
 
+class VetRegisterMenu(StatesGroup):
+    menu = State()
+
 class VetRegister(StatesGroup):
     name = State()
     phone = State()
@@ -22,7 +25,11 @@ class OrderState(StatesGroup):
     day = State()
     price = State()
     location = State()
-    
+
+
+class SupplierRegisterMenuState(StatesGroup):
+    menu = State()
+
 class SupplierRegisterState(StatesGroup):
     name = State()
     phone = State()

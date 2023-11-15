@@ -1,17 +1,32 @@
 from django.shortcuts import render
-from django.contrib import messages
-from vet.models import VetClient, VetUsers
+from vet.models import VetUsers, VetClient
+from delivered.models import DeliverUsers, Delivered
 
 # Create your views here.
 def index(request):
-    VetClient = VetClient.objects.all()
     vetUser = VetUsers.objects.all()
-    
+    delivred = DeliverUsers.objects.all()
     context = {
-        "vetclient":VetClient,
-        "vetuser":VetUsers
+        "delivred":delivred,
+        "vetuser":vetUser
     }
 
     if request.method == 'GET':
         return render(request, 'home.html', context=context)
-    
+
+def delivers(request):
+    if request.method == "GET":
+        delivers = Delivered.objects.all()
+        print(delivers)
+        context = {
+            "delivers":delivers
+        }
+        return render(request, 'delivred.html', context)
+
+def vets(request):
+    if request.method == "GET":
+        vet = VetClient.objects.all()
+        context = {
+            "vet":vet
+        }
+        return render(request, 'vet.html', context)

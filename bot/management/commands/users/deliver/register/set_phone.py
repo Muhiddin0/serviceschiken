@@ -1,3 +1,4 @@
+import os
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 
@@ -9,17 +10,28 @@ from delivered.models import DeliverUsers
 import asyncio
 from asgiref.sync import sync_to_async
 
+import os
+import dotenv
+dotenv.load_dotenv()
 
 async def set_phone_task(message: types.Message, state: FSMContext = None):
     user_id = message.from_user.id
     phone = message.contact.phone_number
+    admin_id = os.getenv('ADMIN_ID')
 
     await message.answer(text=texts.finish_del_register, reply_markup=buttons.start)
 
     data = await state.get_data()
 
-    await sync_to_async(DeliverUsers.objects.create)(user_id=user_id, name=data['name'], phone=phone)
-
+    await bot.send_message(
+        chat_id=admin_id,
+        text=texts.check_deliver_user.format(
+            data['name'],
+            phone,
+            user_id,
+        ),
+        reply_markup=buttons.check_user
+    )
     await state.finish()
 
 

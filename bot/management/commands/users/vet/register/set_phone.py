@@ -9,7 +9,6 @@ from vet.models import VetUsers
 import asyncio
 from asgiref.sync import sync_to_async
 
-
 async def set_phone_task(message: types.Message, state: FSMContext=None):
     user_id = message.from_user.id
     phone = message.contact.phone_number
@@ -17,9 +16,17 @@ async def set_phone_task(message: types.Message, state: FSMContext=None):
     await message.answer(text=texts.finish_vet_register, reply_markup=buttons.start)
     
     data = await state.get_data()
+    data['user_id'] = user_id
+    data['phone'] = phone
 
-    await sync_to_async(VetUsers.objects.create)(user_id=user_id, name=data['name'], phone=phone)
-    
+    # create_user(data)
+    await sync_to_async(VetUsers.objects.create)(
+        user_id=user_id,
+        name=data['name'],
+        phone=phone,
+        status=True
+    )
+
     await state.finish()
     
     

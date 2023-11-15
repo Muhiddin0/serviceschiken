@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .center {
+        display: flex;
+        justify-content: end;
+        margin: 20px 0;
+    }
+</style>
+<section>
+    <div class="container">
+        <div class="shadow-lg p-4 mt-5 round-10" style="border-radius: 15px;">
+            <h1 class="text-center">Vet mijozlari</h1>
+            <div class="texe-center center">
+                <a href="{% url 'vet:excel' %}" class="btn btn-success">Excel</a>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">location</th>
+                        <th scope="col">price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in vet %}
+                    <tr>
+                        <th scope="row">{{ user.id }}</th>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.phone }}</td>
+                        <td>{{ user.location }}</td>
+                        <td>{{ user.price }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock content %}

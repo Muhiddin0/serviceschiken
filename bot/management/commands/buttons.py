@@ -24,3 +24,8 @@ cancel = InlineKeyboardMarkup(row_width=1, inline_keyboard=[[InlineKeyboardButto
 
 
 remove_keyboard = ReplyKeyboardRemove()
+
+check_user = InlineKeyboardMarkup(row_width=2, inline_keyboard=[[
+    InlineKeyboardButton('✅ Tasdiqlash', callback_data="set_delivered"),
+    InlineKeyboardButton('❌ Rad etish', callback_data='unset_deliver')
+]])

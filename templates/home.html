@@ -1,5 +1,114 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>home</h1>
+
+<style>
+    .custom-btn {
+        width: 140px;
+    }
+</style>
+{% if vetuser %}
+<section>
+    <div class="container">
+        <div class="shadow-lg p-4 mt-5 round-10" style="border-radius: 15px;">
+            <h1 class="text-center">Veterenarlar</h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in vetuser %}
+                    <tr>
+                        <th scope="row">{{ user.id }}</th>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.phone }}</td>
+                        <td>
+                            <button type="button" class custom-btn="btn btn-primary" user-id="{{ user.id }}"
+                                onclick="stopVet(this)">To'xtatish</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% else %}
+<h1 class="text-center mt-3">Hozirda Hechqanday Veterenarlar yo'q</h1>
+{% endif %}
+
+
+{% if delivred %}
+<section>
+    <div class="container">
+        <div class="shadow-lg p-4 mt-5 round-10" style="border-radius: 15px;">
+            <h1 class="text-center">Delivred</h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in delivred %}
+                    <tr>
+                        <th scope="row">{{ user.id }}</th>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.phone }}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary custom-btn" user-id="{{ user.id }}"
+                                onclick="stopDeliver(this)">To'xtatish</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% else %}
+<h1 class="text-center mt-3">Hozirda Hechqanday Delivred yo'q</h1>
+{% endif %}
+
+<script>
+    function stopVet(e) {
+        id = e.getAttribute('user-id')
+        axios.get('/vet/stop/' + id)
+            .then(r => {
+                if (r.data['status'] == 'True') {
+                    e.style = 'background: #868686;'
+                    e.innerHTML = "Yoqish"
+                } else {
+                    console.log('else run');
+                    e.style = ''
+                    e.innerHTML = "To'xtatish"
+                }
+            })
+            .catch(e => console.log(e))
+    }
+    function stopDeliver(e) {
+        id = e.getAttribute('user-id')
+        axios.get('/delivred/stop/' + id)
+            .then(r => {
+                if (r.data['status'] == 'True') {
+                    e.style = 'background: #868686;'
+                    e.innerHTML = "Yoqish"
+                } else {
+                    console.log('else run');
+                    e.style = ''
+                    e.innerHTML = "To'xtatish"
+                }
+            })
+            .catch(e => console.log(e))
+    }
+</script>
+
 {% endblock content %}

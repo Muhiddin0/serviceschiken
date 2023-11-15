@@ -23,68 +23,67 @@ def set_client(data):
     
     print(data)
 
+    chickens_img_file = "chichekn_".format(data['user_id'])
+    comment_img_file = "chichekn_".format(data['user_id'])
 
-    response = requests.get(data['img'], stream=True)    
-    response.raise_for_status()
-
-    with open(f'{data["user_id"]}.jpg', 'wb') as file:
-        for chunk in response.iter_content(chunk_size=8192):
-            file.write(chunk)
-    
 
     m = Delivered()
     m.name = data['name']
     m.phone = data['phone']
     m.location = data['location']
-    m.day = data['price']
-    m.img = ImageFile(open(f"{data['user_id']}.jpg", "rb"))
-    m.save()
+    m.price = data['price']
+    m.img = ImageFile(open(f"{chickens_img_file}.jpg", "rb"))
+    m.comment = data['comment']
+    m.comment_img = ImageFile(open(f"{comment_img_file}.jpg", "rb"))
 
     os.remove(f'{data["user_id"]}.jpg')
 
 async def set_name_task(message: types.Message, state: FSMContext=None):
-    user_id = message.from_user.id
-    file_id = message.photo[-1].file_id  # get file_id of the photo
+    comment_img_file_id = message.photo[-1].file_id  # get file_id of the photo
+    comment = message.caption  # get file_id of the photo
 
     await message.answer(texts.finish_deliver)
 
-    file_info = await bot.get_file(file_id)  # get file information
-
-    img = "https://api.telegram.org/file/bot{}/{}".format(os.getenv('BOT_TOKEN'), file_info['file_path'])
-   
+    file_info = await bot.get_file(comment_img_file_id)  # get file information
     state_data = await state.get_data()
-    state_data['user_id'] = user_id
-    state_data['img'] = img
+    state_data['comment_img'] = {
+        "file_id":comment_img_file_id,
+        "file_path":file_info['file_path']
+    } 
 
-    await set_client(state_data)
+    state_data['comment'] = comment
+
+    img = "https://api.telegram.org/file/bot{}/{}"
+    
+    bot_token = os.getenv('BOT_TOKEN')
+    chat_id = os.getenv('GROUP_CHAT_ID')
+
+    await sync_to_async(Delivered.objects.create)(
+        name = state_data['name'],
+        phone = state_data['phone'],
+        location = state_data['location'],
+        price = state_data['price'],
+        img = img.format(bot_token, state_data['chicken_img_id']['file_path']),
+        comment = state_data['comment'],
+        comment_img = img.format(bot_token, state_data['comment_img']['file_path'])
+    )
+    caption=texts.deliver_caption.format(
+        state_data['name'],
+        state_data['phone'],
+        state_data['location'],
+        state_data['price'],
+    )
+
     media_group = [
-        InputMediaPhoto(media='', caption='Caption 1'),
-        InputMediaPhoto(media='', caption='Caption 2'),
-        # Add more media items as needed
+        InputMediaPhoto(media=state_data['chicken_img_id']['file_id'], caption=caption),
+        InputMediaPhoto(media=state_data['comment_img']['file_id']),
     ]
 
     await bot.send_media_group(
-        chat_id=os.getenv("GROUP_CHAT_ID"),
+        chat_id=chat_id,
         media=media_group,
-        caption=texts.deliver_caption.format(
-            state_data['name'],
-            state_data['phone'],
-            state_data['location'],
-            state_data['price'],
-        )
     )
         
-
-    await bot.send_media_group()(
-        chat_id=os.getenv("GROUP_CHAT_ID"),
-        photo=file_id,
-        caption=texts.deliver_caption.format(
-            state_data['name'],
-            state_data['phone'],
-            state_data['location'],
-            state_data['price'],
-        )
-    )
     await state.finish()
     
 @dp.message_handler(content_types=['photo'], state=DeliveryState.comment)

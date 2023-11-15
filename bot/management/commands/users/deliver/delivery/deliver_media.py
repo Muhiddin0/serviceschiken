@@ -38,36 +38,24 @@ def set_client(data):
     d.img = ImageFile(open(f"{data['user_id']}.jpg", "rb"))
     d.comment = data['comment']
     d.save()
+
     print(d)
     os.remove(f'{data["user_id"]}.jpg')
 
 
 async def set_name_task(message: types.Message, state: FSMContext = None):
-    user_id = message.from_user.id
-    chicken_img_id = message.photo[-1].file_id  # get file_id of the photo
+    chicken_img_file_id = message.photo[-1].file_id  # get file_id of the photo
 
     await message.answer(texts.deliver_comment)
-
-
-    # img = "https://api.telegram.org/file/bot{}/{}".format(os.getenv('BOT_TOKEN'), file_info['file_path'])
+    file_info = await bot.get_file(chicken_img_file_id)  # get file information
 
     state_data = await state.get_data()
-    state_data['chicken_img_id'] = chicken_img_id
+    state_data['chicken_img_id'] = {
+        "file_id":chicken_img_file_id,
+        "file_path":file_info['file_path']
+    } 
 
     await state.set_data(state_data)
-
-    # await bot.send_photo(
-    #     chat_id=os.getenv("GROUP_CHAT_ID"),
-    #     photo=file_id,
-    #     caption=texts.deliver_caption.format(
-    #         state_data['name'],
-    #         state_data['phone'],
-    #         state_data['location'],
-    #         state_data['price'],
-    #         state_data['comment']
-
-    #     )
-    # )
 
     await DeliveryState.comment.set()
 
