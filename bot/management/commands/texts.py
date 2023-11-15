@@ -181,7 +181,7 @@ Tashxis: {}
 """
 
 check_deliver_user = """
-role: yetkazib beruvchi
+role: <a href="tg://user?username=@dailyuzbbot">{}</a>
 Ismi: <a href="tg://user?username=@dailyuzbbot">{}</a>
 name: <a href="tg://user?username=@dailyuzbbot">{}</a>
 account: <a href="tg://user?id={}">user</a>
@@ -202,4 +202,8 @@ feedback_finish = """
 send_offer = """
 text: {}
 >>>>>>> 54ab090ec65a3f717d2ff0359bce0eeb3ee18552
+"""
+
+fail = """
+Uzur sizning arizangizni adminlar rad qilishdi
 """

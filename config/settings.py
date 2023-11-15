@@ -42,8 +42,7 @@ INSTALLED_APPS = [
     'index',
     'vet',
     'delivered',
-    'blacklist',
-    
+
     'crispy_forms',
     'crispy_bootstrap5',
     'django_async_orm',

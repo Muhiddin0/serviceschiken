@@ -26,6 +26,7 @@ async def set_phone_task(message: types.Message, state: FSMContext = None):
     await bot.send_message(
         chat_id=admin_id,
         text=texts.check_deliver_user.format(
+            'yetkazib beruvchi',
             data['name'],
             phone,
             user_id,

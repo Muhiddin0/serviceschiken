@@ -4,7 +4,7 @@
 <style>
     .center {
         display: flex;
-        justify-content: end;
+        justify-content: space-between;
         margin: 20px 0;
     }
 </style>
@@ -14,6 +14,7 @@
             <h1 class="text-center">Delivers mijozlari</h1>
             <div class="texe-center center">
                 <a href="{% url 'delivred:excel' %}" class="btn btn-success">Excel</a>
+                <a href="{% url 'delivred:clear' %}" class="btn btn-danger">Clear</a>
             </div>
             <table class="table">
                 <thead>
@@ -40,4 +41,11 @@
         </div>
     </div>
 </section>
+
+{% for message in messages %}
+<div>
+    {{message.message}}
+</div>
+{% endfor %}
+
 {% endblock content %}

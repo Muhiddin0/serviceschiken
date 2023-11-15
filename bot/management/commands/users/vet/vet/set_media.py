@@ -49,6 +49,8 @@ def set_client(data):
     os.remove(f'{data["user_id"]}.jpg')
 
 async def set_name_task(message: types.Message, state: FSMContext=None):
+
+
     user_id = message.from_user.id
     file_id = message.photo[-1].file_id  # get file_id of the photo
 
@@ -62,8 +64,8 @@ async def set_name_task(message: types.Message, state: FSMContext=None):
     state_data['user_id'] = user_id
     state_data['img'] = img
 
-    await set_client(state_data)
-
+    # await set_client(state_data)
+    
     await bot.send_photo(
         chat_id=os.getenv("GROUP_CHAT_ID"),
         photo=file_id,
