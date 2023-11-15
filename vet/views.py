@@ -26,14 +26,7 @@ def clearVet(request):
     messages.success(request, 'veterenaliya tarixi tozalandi')
 
     VetClient.objects.all().delete()
-    return HttpResponse(json.dumps(
-            {
-                "status":True,
-            }
-        ),
-        content_type="application/json"
-    )
-
+    return render(request, 'vet.html', )
 
 def export_excel(request):
 

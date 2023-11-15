@@ -1,6 +1,7 @@
 import json
 from pyexpat.errors import messages
 from django.http import HttpResponse
+from django.shortcuts import render
 from .models import DeliverUsers, Delivered
 
 from openpyxl import Workbook
@@ -28,14 +29,7 @@ def clear(request):
     messages.success(request, 'veterenaliya tarixi tozalandi')
 
     Delivered.objects.all().delete()
-    return HttpResponse(json.dumps(
-            {
-                "status":True,
-            }
-        ),
-        content_type="application/json"
-    )
-
+    return render(request, 'delivred.html')
 
 
 def export_excel(request):

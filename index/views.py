@@ -17,7 +17,6 @@ def index(request):
 def delivers(request):
     if request.method == "GET":
         delivers = Delivered.objects.all()
-        print(delivers)
         context = {
             "delivers":delivers
         }
