@@ -10,6 +10,12 @@ start = ReplyKeyboardMarkup([
 phone = ReplyKeyboardMarkup([
     [KeyboardButton('📞 Send', request_contact=True)]
 ], resize_keyboard=True)
+feedback = ReplyKeyboardMarkup([
+    [KeyboardButton("📃Taklif bildirish")],
+    [KeyboardButton("📜shikoyat bildirish")]
+], resize_keyboard=True)
+ 
+
 
 
 location = ReplyKeyboardMarkup([

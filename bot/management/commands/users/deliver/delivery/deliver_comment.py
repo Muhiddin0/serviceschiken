@@ -79,10 +79,17 @@ async def set_name_task(message: types.Message, state: FSMContext=None):
         InputMediaPhoto(media=state_data['comment_img']['file_id']),
     ]
 
+    await set_client(state_data)
     await bot.send_media_group(
         chat_id=chat_id,
         media=media_group,
     )
+    media_group = [
+        InputMediaPhoto(media='', caption='caption'),
+        InputMediaPhoto(media='', caption='Caption 2'),
+        # Add more media items as needed
+    ]
+
         
     await state.finish()
     

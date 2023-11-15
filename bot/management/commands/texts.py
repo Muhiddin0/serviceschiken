@@ -1,16 +1,14 @@
-
+# start-botni ishga tusharadi
 start = \
 """
 <b>Assalomu alaykum Inter broiler botimizga xush kelibsiz.</b>
 """
-
 menu = """
 Asosiy menu
 """
 great = """
 👌 Juda yaxshi
 """
-
 set_name = """
 <b>Ismingizni kiriting:</b>
 """
@@ -37,6 +35,8 @@ Tez orada adminlarimiz bog'lanadi
 
 
 
+
+
 # Yetkazib beruvchi
 
 deliver_name = """
@@ -46,7 +46,7 @@ deliver_phone = """
 📞 Mijozning telefon raqamini kiriting:
 """
 deliver_location = """
-🏬  Jo`jani olib brogan manzilni yozing
+🏬  Jo`jani olib brogan manzilni kiriting
 """
 deliver_price = """
 🐥Nechta jo`ja olib bordingiz
@@ -62,12 +62,22 @@ finish_deliver = """
 """
 
 
+
+
+# deliver_caption 
+
 deliver_caption = """
 ismi: {}
 telefoni: {}
 manzili: {}
 Jo'ja soni: {}
 """
+
+
+
+
+
+# deliver_registration
 
 register_deliver = """
 Yetkazib beruvchi Sifatida ro'yxatdan o'ting
@@ -90,9 +100,9 @@ Sizning hissobingiz adminlar tomonidan vaqtinchalik to'xtatilgan
 """
 
 
+#buyurtma_caption
 
 send_order = """
-#buyurtma
 
 👨‍🏫 Ismi: {}
 📞 telefoni: {}
@@ -100,6 +110,10 @@ send_order = """
 🐥 miqdori: {}
 🏘 manzili: {}
 """
+
+
+
+# veterinar_regitration
 
 register_vet = """
 Veterenar Sifatida ro'yxatdan o'ting
@@ -109,6 +123,12 @@ finish_vet_register = """
 🎉 Veterenar sifatida ro'yxatdan
 O'tganingiz bilan tabriklayman
 """
+
+
+
+
+
+# veterinar_form
 
 vet_client_name = """
 Mijoz ismini kiriting:
@@ -145,6 +165,10 @@ vet_day = """
 Jo`ja necha kunligini kiriting
 """
 
+
+
+# vet_caption 
+
 vet_caption = """
 ismi: {}
 telefoni: {}
@@ -161,4 +185,21 @@ role: yetkazib beruvchi
 Ismi: <a href="tg://user?username=@dailyuzbbot">{}</a>
 name: <a href="tg://user?username=@dailyuzbbot">{}</a>
 account: <a href="tg://user?id={}">user</a>
+"""
+
+
+feed_text = """
+👇Fikr yuborish uchun birini tanlang
+"""
+complaint_text = """
+📝xabarni yozing
+"""
+
+feedback_finish = """
+✅ Sizning fikringiz qabul qilindi
+"""
+
+send_offer = """
+text: {}
+>>>>>>> 54ab090ec65a3f717d2ff0359bce0eeb3ee18552
 """
