@@ -42,7 +42,7 @@ async def set_name_task(message: types.Message, state: FSMContext=None):
     comment_img_file_id = message.photo[-1].file_id  # get file_id of the photo
     comment = message.caption  # get file_id of the photo
 
-    await message.answer(texts.finish_deliver)
+    await message.answer(texts.finish_deliver, reply_markup=buttons.start)
 
     file_info = await bot.get_file(comment_img_file_id)  # get file information
     state_data = await state.get_data()
@@ -84,12 +84,6 @@ async def set_name_task(message: types.Message, state: FSMContext=None):
         chat_id=chat_id,
         media=media_group,
     )
-    media_group = [
-        InputMediaPhoto(media='', caption='caption'),
-        InputMediaPhoto(media='', caption='Caption 2'),
-        # Add more media items as needed
-    ]
-
         
     await state.finish()
     

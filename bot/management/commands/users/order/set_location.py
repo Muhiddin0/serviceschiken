@@ -21,7 +21,7 @@ async def set_phone_task(message: types.Message, state: FSMContext=None):
 
     await state.set_data(state_data)
 
-    await message.answer(text=texts.finish)    
+    await message.answer(text=texts.finish, reply_markup=buttons.start)    
     
     data = await state.get_data()
 

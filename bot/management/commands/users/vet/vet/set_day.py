@@ -11,6 +11,11 @@ import asyncio
 async def set_name_task(message: types.Message, state: FSMContext=None):
     day = message.text
 
+    
+    if not day.isdigit():
+        await message.answer(texts.day_error)
+        return
+    
     # set data in state
     state_data = await state.get_data()
     state_data['day'] = day

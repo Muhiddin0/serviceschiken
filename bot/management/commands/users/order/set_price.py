@@ -11,12 +11,16 @@ import asyncio
 async def set_name_task(message: types.Message, state: FSMContext=None):
     price = message.text
 
+    if not price.isdigit():
+        await message.answer(texts.price_error)
+        return
+
     state_data = await state.get_data()
     state_data['price'] = price
 
     await state.set_data(state_data)
 
-    await message.answer(texts.set_location)
+    await message.answer(texts.set_location, reply_markup=buttons.cancel)
     
     await OrderState.location.set()
     

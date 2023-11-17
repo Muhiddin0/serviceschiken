@@ -39,7 +39,6 @@ def export_excel(request):
 
     duser = DeliverUsers.objects.all()
     for i in duser:
-            
 
         # Write the headers to the worksheet
         headers = ["Xizmat ko'rsatdi", 'Name', 'Phone', 'Location', 'price', 'img', 'comment_img', 'comment']  # Replace with your field names

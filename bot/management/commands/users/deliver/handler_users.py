@@ -16,7 +16,6 @@ from asgiref.sync import sync_to_async
 async def set_order_task(message: types.Message, state: FSMContext=None):
     user_id = message.from_user.id
 
-    # user = await VetUsers.objects.async_filter(user_id=user_id)
     user = await sync_to_async(DeliverUsers.objects.filter)(user_id=user_id)
 
     print(user)
@@ -29,7 +28,9 @@ async def set_order_task(message: types.Message, state: FSMContext=None):
     if not user.first().status:
         await message.answer(texts.block_user)
         return
-    await message.answer(texts.deliver_name)
+
+    await message.answer(texts.great, reply_markup=buttons.remove_keyboard)
+    await message.answer(texts.deliver_name, reply_markup=buttons.cancel)
 
     await DeliveryState.name.set()
 

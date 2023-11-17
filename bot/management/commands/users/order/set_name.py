@@ -15,7 +15,9 @@ async def set_name_task(message: types.Message, state: FSMContext=None):
             "name":name
         }
     )
-    await message.answer(text=texts.set_phone, reply_markup=buttons.phone)
+    
+    await message.answer(text=texts.great, reply_markup=buttons.phone)
+    await message.answer(text=texts.set_phone, reply_markup=buttons.cancel)
     
     await OrderState.phone.set()
     

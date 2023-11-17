@@ -46,7 +46,8 @@ def set_client(data):
 async def set_name_task(message: types.Message, state: FSMContext = None):
     chicken_img_file_id = message.photo[-1].file_id  # get file_id of the photo
 
-    await message.answer(texts.deliver_comment)
+    await message.answer(texts.deliver_comment, reply_markup=buttons.cancel)
+    
     file_info = await bot.get_file(chicken_img_file_id)  # get file information
 
     state_data = await state.get_data()

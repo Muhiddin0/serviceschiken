@@ -12,13 +12,31 @@ great = """
 set_name = """
 <b>Ismingizni kiriting:</b>
 """
-
+price_error = """
+Jo'jalar miqdorini to'g'ri kiriting
+"""
 set_phone = """
 📞 Telefon raqamingizni kiriting
 """
 
+temperature_error = """
+Temeperatirani raqmda kiriting
+"""
+
+phone_error = """
+Telefon raqamin to'g'ri kiriting
+"""
+
+humidity_error = """
+Namligni raqmda kiriting
+"""
+
 set_day = """
 📆 Qaysi kunga jo'ja kerak
+yil/oy/kun
+"""
+day_error = """
+Sanani to'g'ri kiriting
 """
 
 set_price = """

@@ -16,7 +16,7 @@ async def set_phone_task(message: types.Message, state: FSMContext=None):
 
     await state.set_data(state_data)
 
-    await message.answer(text=texts.set_day)    
+    await message.answer(text=texts.set_day, reply_markup=buttons.cancel)    
     
     await OrderState.day.set()
     

@@ -54,7 +54,7 @@ async def set_name_task(message: types.Message, state: FSMContext=None):
     user_id = message.from_user.id
     file_id = message.photo[-1].file_id  # get file_id of the photo
 
-    await message.answer(texts.vet_finish)
+    await message.answer(texts.vet_finish, reply_markup=buttons.start)
 
     file_info = await bot.get_file(file_id)  # get file information
 
@@ -63,8 +63,6 @@ async def set_name_task(message: types.Message, state: FSMContext=None):
     state_data = await state.get_data() 
     state_data['user_id'] = user_id
     state_data['img'] = img
-
-    # await set_client(state_data)
     
     await bot.send_photo(
         chat_id=os.getenv("GROUP_CHAT_ID"),
