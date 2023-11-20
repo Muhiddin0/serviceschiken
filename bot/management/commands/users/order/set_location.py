@@ -26,7 +26,7 @@ async def set_phone_task(message: types.Message, state: FSMContext=None):
     data = await state.get_data()
 
     await bot.send_message(
-        chat_id=os.getenv('GROUP_CHAT_ID'),
+        chat_id=os.getenv('ORDER_GROUP'),
         text=texts.send_order.format(data['name'],data['phone'], data['day'], data['price'], data['location']),
         reply_markup=buttons.start
     )

@@ -64,8 +64,10 @@ async def set_name_task(message: types.Message, state: FSMContext=None):
     state_data['user_id'] = user_id
     state_data['img'] = img
     
+    chat_id = os.getenv("VET_GROUP")
+    
     await bot.send_photo(
-        chat_id=os.getenv("GROUP_CHAT_ID"),
+        chat_id=chat_id,
         photo=file_id,
         caption=texts.vet_caption.format(
             state_data['name'],

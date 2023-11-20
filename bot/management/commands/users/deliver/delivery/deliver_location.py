@@ -15,8 +15,14 @@ async def set_phone_task(message: types.Message, state: FSMContext=None):
 
     YOUR_PRIVATE_TOKEN = "pk.ac43a63445fbb2ab91a912edbae60a24"
     url = f"https://us1.locationiq.com/v1/reverse.php?key={YOUR_PRIVATE_TOKEN}&lat={lat}&lon={lon}&format=json"
-    response = requests.get(url).json()
+    response = requests.get(url)
+    # .json()
     
+    if response.status_code == 400:
+        await message.answer(texts.error_loaction)
+        return
+    
+    response = response.json()
 
     state_data = await state.get_data()
     state_data['location'] = response['display_name']

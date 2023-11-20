@@ -1,14 +1,12 @@
 from django.core.files.images import ImageFile
 
-import io
 from aiogram import types
 from aiogram.dispatcher import FSMContext
-import requests
 
 from ....loader import dp, bot
 from .... import texts, buttons
 from ....states import DeliveryState
-from delivered.models import Delivered
+from delivered.models import Delivered, DeliverUsers
 import asyncio
 from asgiref.sync import sync_to_async
 from aiogram.types import InputMediaPhoto
@@ -18,29 +16,15 @@ import os
 
 dotenv.load_dotenv()
 
-@sync_to_async
-def set_client(data):
-    
-    print(data)
-
-    chickens_img_file = "chichekn_".format(data['user_id'])
-    comment_img_file = "chichekn_".format(data['user_id'])
-
-
-    m = Delivered()
-    m.name = data['name']
-    m.phone = data['phone']
-    m.location = data['location']
-    m.price = data['price']
-    m.img = ImageFile(open(f"{chickens_img_file}.jpg", "rb"))
-    m.comment = data['comment']
-    m.comment_img = ImageFile(open(f"{comment_img_file}.jpg", "rb"))
-
-    os.remove(f'{data["user_id"]}.jpg')
-
 async def set_name_task(message: types.Message, state: FSMContext=None):
+    user_id = message.from_user.id
+
     comment_img_file_id = message.photo[-1].file_id  # get file_id of the photo
     comment = message.caption  # get file_id of the photo
+
+    if not comment:
+        await  message.answer(texts.error_comment)
+        return 
 
     await message.answer(texts.finish_deliver, reply_markup=buttons.start)
 
@@ -51,20 +35,20 @@ async def set_name_task(message: types.Message, state: FSMContext=None):
         "file_path":file_info['file_path']
     } 
 
-    state_data['comment'] = comment
-
     img = "https://api.telegram.org/file/bot{}/{}"
     
     bot_token = os.getenv('BOT_TOKEN')
-    chat_id = os.getenv('GROUP_CHAT_ID')
+    chat_id = os.getenv('DELIVER_GROUP')
 
+    deliver_user = DeliverUsers.objects.get(user_id=user_id)
     await sync_to_async(Delivered.objects.create)(
+        delivered=deliver_user,
         name = state_data['name'],
         phone = state_data['phone'],
         location = state_data['location'],
         price = state_data['price'],
         img = img.format(bot_token, state_data['chicken_img_id']['file_path']),
-        comment = state_data['comment'],
+        comment = comment,
         comment_img = img.format(bot_token, state_data['comment_img']['file_path'])
     )
     caption=texts.deliver_caption.format(
@@ -79,7 +63,6 @@ async def set_name_task(message: types.Message, state: FSMContext=None):
         InputMediaPhoto(media=state_data['comment_img']['file_id']),
     ]
 
-    await set_client(state_data)
     await bot.send_media_group(
         chat_id=chat_id,
         media=media_group,

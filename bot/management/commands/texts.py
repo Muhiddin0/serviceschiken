@@ -15,6 +15,19 @@ set_name = """
 price_error = """
 Jo'jalar miqdorini to'g'ri kiriting
 """
+
+set_suggest = """
+Fikringizni kiriting
+"""
+
+set_complaint = """
+SHikoyatingizni kiriting
+"""
+
+succes_feddback = """
+👌 Sizning fikiringiz yuborildi
+"""
+
 set_phone = """
 📞 Telefon raqamingizni kiriting
 """
@@ -30,6 +43,11 @@ Telefon raqamin to'g'ri kiriting
 humidity_error = """
 Namligni raqmda kiriting
 """
+
+error_comment = """
+Rasim tagiga <a href="https://www.youtube.com/watch?v=zTeU392Vj8Q">izoh</a> bering
+"""
+
 
 set_day = """
 📆 Qaysi kunga jo'ja kerak
@@ -80,7 +98,10 @@ finish_deliver = """
 """
 
 
-
+error_loaction = """
+Xato joylashuv kiritingiz 
+Aloqa sifatini tekshirib qaytadan yuboring
+"""
 
 # deliver_caption 
 
@@ -224,4 +245,14 @@ text: {}
 
 fail = """
 Uzur sizning arizangizni adminlar rad qilishdi
+"""
+
+not_subscribe = """
+Fikir bildiirish uchun quyidagi kanalga obuna bo'ling
+"""
+
+feddback_caption = """
+Feddback: {}
+user: <a href="tg://user?id={}">{}</a>
+message: {}
 """

@@ -46,4 +46,5 @@ class DeliveryState(StatesGroup):
     
 
 class Feedback(StatesGroup):
-    text = State()   
+    suggest = State()
+    complaint = State()
