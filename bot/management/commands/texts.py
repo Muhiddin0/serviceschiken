@@ -248,7 +248,7 @@ Uzur sizning arizangizni adminlar rad qilishdi
 """
 
 not_subscribe = """
-Fikir bildiirish uchun quyidagi kanalga obuna bo'ling
+Fikir bildiirish uchun quyidagi gruppaga obuna bo'ling
 """
 
 feddback_caption = """

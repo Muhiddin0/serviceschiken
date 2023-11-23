@@ -13,7 +13,13 @@ load_dotenv()
 
 async def start_task(message: types.Message, state: FSMContext=None):
     user_id = message.from_user.id
-        
+    main_group_id = os.getenv("MAIN_GROUP_ID")
+    user_status = await bot.get_chat_member(chat_id=main_group_id, user_id=user_id)
+
+    if user_status['status'] == 'left':
+        await message.answer(texts.not_subscribe, reply_markup=buttons.chanel)
+        return
+
     await message.answer(texts.feed_text, reply_markup=buttons.feedback)
     
     
